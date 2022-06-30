@@ -37,14 +37,13 @@ const thoughtController = {
     // {
     //     "thoughtText": "hey",
     //     "username": "reka",
-    //     "_id": "[insert random numbers here]"
     // }
     createThought({ body }, res) {
         Thought.create(body)
         .then(dbThoughtData => {
             User.findOneAndUpdate(
-                { username: username },
-                { $push: { thoughts: _id }},
+                { username: body.username },
+                { $push: { thoughts: dbThoughtData._id }},
                 { new: true }
             )
             .then(dbUserData => {
